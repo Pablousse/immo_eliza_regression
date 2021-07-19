@@ -23,14 +23,13 @@ def remove_outliers(df):
     Q3 = df.quantile(0.75)
     IQR = Q3 - Q1
 
-    # uncomment for showing the outliers
+    # uncomment for printing the outliers
     # print(df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))
 
     df_outliers_removed = df[~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR))).any(axis=1)]
-    df_outliers_removed.shape
     # explanation: https://towardsdatascience.com/ways-to-detect-and-remove-the-outliers-404d16608dba
 
-    return df
+    return df_outliers_removed
 
 def transform_categorical_feature(df, column_name, column_prefix=""):
     # transforming textual data to categorical features
