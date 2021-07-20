@@ -24,7 +24,7 @@ def create_random_forest_model(
     df = remove_outliers(df)
     if dataset_type != "":
         df = df.loc[df["type"] == dataset_type]
-
+    df = df.query(" 999 < location < 1300")
     df = df.drop(
         [
             "id",
@@ -46,7 +46,7 @@ def create_random_forest_model(
     ndf = df.drop(["price"], axis=1)
     x = ndf.to_numpy()
     X_train, X_test, y_train, y_test = train_test_split(
-        x, y, random_state=42, test_size=0.2
+        x, y, random_state=1, test_size=0.2
     )
     reg = RandomForestRegressor(random_state=0).fit(X_train, y_train)
     print(f"Score = {reg.score(X_test,y_test)}")
