@@ -10,6 +10,15 @@ from utils.data_cleaners import clean_df, remove_outliers, transform_categorical
 def create_random_forest_model(
     dataset_type: Optional[str] = "",
 ) -> RandomForestRegressor:
+    """The aim of this function is to create and train the model that we are gonna use for the predictions
+
+    Args:
+        dataset_type (Optional[str], optional): This parameter can't be either "", "HOUSE" or "APARTMENT"
+        it determines which dataset we are using to train or model in case of "", it trains it with the complete dataset
+
+    Returns:
+        RandomForestRegressor: returns the model
+    """
     df = pd.read_csv("assets/houses.csv")
     df = clean_df(df)
     df = remove_outliers(df)
