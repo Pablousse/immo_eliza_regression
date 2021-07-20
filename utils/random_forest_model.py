@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 
 
-def create_random_forest_model():
+def create_random_forest_model() -> RandomForestRegressor:
     df = pd.read_csv("assets/houses.csv")
     df = clean_df(df)
     df = remove_outliers(df)
