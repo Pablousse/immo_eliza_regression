@@ -38,9 +38,6 @@ def remove_outliers(df: pd.DataFrame) -> pd.DataFrame:
     Q3 = df.quantile(0.75)
     IQR = Q3 - Q1
 
-    # uncomment for printing the outliers
-    # print(df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))
-
     df_outliers_removed = df[
         ~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR))).any(axis=1)
     ]
