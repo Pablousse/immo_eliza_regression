@@ -38,16 +38,12 @@ def remove_outliers(df: pd.DataFrame) -> pd.DataFrame:
     Q3 = df.quantile(0.75)
     IQR = Q3 - Q1
 
-    df_outliers_removed = df[
-        ~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR))).any(axis=1)
-    ]
+    df_outliers_removed = df[~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR))).any(axis=1)]
 
     return df_outliers_removed
 
 
-def transform_categorical_feature(
-    df: pd.DataFrame, column_name: str, column_prefix: str = ""
-) -> pd.DataFrame:
+def transform_categorical_feature(df: pd.DataFrame, column_name: str, column_prefix: str = "") -> pd.DataFrame:
     """
     creates columns of binary values from categorical textual information
     """
