@@ -55,7 +55,7 @@ def transform_categorical_feature(
     creates columns of binary values from categorical textual information
     """
 
-    df1 = df[column_name].str.get_dummies()
+    df1 = pd.get_dummies(df[column_name].astype(str))
     if column_prefix != "":
         df1.columns = ["is_type_" + col for col in df1.columns]
 

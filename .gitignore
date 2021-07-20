@@ -355,6 +355,7 @@ env
 .pre-commit-config.yaml
 .vscode
 .pytest_cache
+mypy.ini
 
 # notebook files
 **/*.ipynb_checkpoints/
