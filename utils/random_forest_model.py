@@ -37,18 +37,21 @@ def create_random_forest_model(
         ],
         axis=1,
     )
-    df = transform_categorical_feature(df, "subtype", "is_subtype_")
-    df = transform_categorical_feature(
-        df, "building_condition", "is_building_condition_"
+    ndf = transform_categorical_feature(df, "subtype", "is_subtype_")
+    ndf = transform_categorical_feature(
+        ndf, "building_condition", "is_building_condition_"
     )
-    df = transform_categorical_feature(df, "location", "zipcode_")
-    y = df.price.to_numpy().reshape(-1, 1)
-    ndf = df.drop(["price"], axis=1)
+    ndf = transform_categorical_feature(ndf, "location", "zipcode_")
+    y = ndf.price.to_numpy().reshape(-1, 1)
+    ndf = ndf.drop(["price"], axis=1)
     x = ndf.to_numpy()
     X_train, X_test, y_train, y_test = train_test_split(
         x, y, random_state=1, test_size=0.2
     )
     reg = RandomForestRegressor(random_state=0).fit(X_train, y_train)
+    df['predicted_price'] = reg.predict(x)
+    df = df.sort_values(by='location')
+    df.to_csv('Brussels-price-predictions.csv', index=False, float_format='%.0f')
     print(f"Score = {reg.score(X_test,y_test)}")
 
     return reg
