@@ -24,7 +24,7 @@ def create_random_forest_model(
     df = remove_outliers(df)
     if dataset_type != "":
         df = df.loc[df["type"] == dataset_type]
-    df = df.query(" 999 < location < 1300")
+    # df = df.query(" 999 < location < 1300")
     df = df.drop(
         [
             "id",
@@ -53,5 +53,6 @@ def create_random_forest_model(
     df = df.sort_values(by='location')
     df.to_csv('Brussels-price-predictions.csv', index=False, float_format='%.0f')
     print(f"Score = {reg.score(X_test,y_test)}")
+    print(1 - (1-reg.score(X_test, y_test))*(len(y_test)-1)/(len(y_test)-X_test.shape[1]-1))
 
     return reg
